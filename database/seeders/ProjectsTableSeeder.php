@@ -17,10 +17,7 @@ class ProjectsTableSeeder extends Seeder
 
         foreach ($projects as $project) {
             $newProject = new Project();
-            $newProject->name = $project["name"];
-            $newProject->description = $project["description"];
-            $newProject->url = $project["url"];
-            $newProject->image = $project["image"];
+            $newProject->fill($project);
             $newProject->save();
         }
     }
