@@ -1,0 +1,52 @@
+@import '~bootstrap/scss/bootstrap';
+
+body {
+    // background: linear-gradient(45deg, #DD4814, #77216E #5E2750, #2C001E, #AEA79F, #333333) !important;
+    background: rgb(238, 174, 202);
+    background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+}
+
+.glass {
+    background: rgba(255, 255, 255, 0.48);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.194);
+    backdrop-filter: blur(14.3px);
+    -webkit-backdrop-filter: blur(14.3px);
+}
+
+.card.glass {
+    padding: 0px;
+    width: 400px !important;
+}
+
+.card-img-top-container {
+    height: 262px;
+}
+
+.card-img-top {
+    object-fit: contain;
+    max-height: 262px;
+    max-width: 262px;
+}
+
+p {
+    margin: 0;
+}
+
+.btn {
+    height: 50px !important;
+}
+
+#add-project {
+    width: 70px !important;
+    height: 70px !important;
+    padding: 0;
+    position: fixed;
+    z-index: 999;
+    bottom: 30px;
+    right: 30px;
+}
+
+#add-project:hover {
+    background-color: white !important;
+}
