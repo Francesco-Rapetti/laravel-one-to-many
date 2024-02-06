@@ -7,8 +7,16 @@
                         <img src="{{ $project->image }}" class="card-img-top" alt="...">
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">{{ $project->name }}</h5>
+                        <h5 class="card-title">{{ $project->name }}
+                            @if ($project->type_id)
+                                <span class="badge bg-secondary"><i
+                                        class="{{ $types[$project->type_id - 1]->icon }} me-2"></i>{{ $types[$project->type_id - 1]->name }}</span>
+                            @endif
+                        </h5>
                         <p class="card-text">{{ $project->description }}</p>
+                        <span class="badge rounded-pill text-bg-light">Tags</span>
+                        <span class="badge rounded-pill text-bg-light">Tags</span>
+                        <span class="badge rounded-pill text-bg-light">Tags</span>
                     </div>
                     <div class="d-flex align-items-center mb-3 ps-3 justify-self-end justify-content-center">
                         <a class="btn btn-primary me-3 add-cart-btn w-100 d-flex justify-content-center align-items-center"
