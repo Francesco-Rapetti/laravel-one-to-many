@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectsController;
 use App\Models\Project;
+use App\Models\Type;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +18,9 @@ use App\Models\Project;
 */
 
 Route::get('/', function () {
+    $types = Type::all();
     $projects = Project::all();
-    return view('welcome', compact('projects'));
+    return view('welcome', compact('projects', 'types'));
 });
 
 Route::middleware(['auth'])
