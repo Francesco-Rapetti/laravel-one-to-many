@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Support\Facades\Validator;
 
 class ProjectsController extends Controller
@@ -26,8 +27,9 @@ class ProjectsController extends Controller
      */
     public function index()
     {
+        $types = Type::all();
         $projects = Project::all();
-        return view('admin.dashboard', compact('projects'));
+        return view('admin.dashboard', compact('projects', 'types'));
     }
 
     /**
@@ -35,7 +37,8 @@ class ProjectsController extends Controller
      */
     public function create()
     {
-        return view('admin.projects.create');
+        $types = Type::all();
+        return view('admin.projects.create', compact('types'));
     }
 
     /**
@@ -46,10 +49,7 @@ class ProjectsController extends Controller
         $this->validation($request);
 
         $project = new Project();
-        $project->name = $request->name;
-        $project->description = $request->description;
-        $project->url = $request->url;
-        $project->image = $request->image;
+        $project->fill($request->all());
         $project->save();
 
         return redirect()->route('admin.dashboard');
@@ -68,8 +68,9 @@ class ProjectsController extends Controller
      */
     public function edit(string $id)
     {
+        $types = Type::all();
         $project = Project::find($id);
-        return view('admin.projects.edit', compact('project'));
+        return view('admin.projects.edit', compact('project', 'types'));
     }
 
     /**
@@ -81,10 +82,7 @@ class ProjectsController extends Controller
 
         $project = Project::find($id);
 
-        $project->name = $request->name;
-        $project->description = $request->description;
-        $project->url = $request->url;
-        $project->image = $request->image;
+        $project->fill($request->all());
         $project->update();
         return redirect()->route('admin.dashboard');
     }
