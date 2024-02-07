@@ -58,7 +58,9 @@
                 <div class="mb-3">
                     <label for="type_id" class="form-label">seleziona una categoria</label>
                     <select name="type_id" id="type_id" class="form-select">
-                        <option selected value="">seleziona una categoria</option>
+                        <option selected value="{{ old('type_id') ?? $project->type_id }}">
+                            {{ old('type_id') ?? (App\Models\Type::find($project->type_id)->name ?? 'seleziona una categoria') }}
+                        </option>
                         @foreach ($types as $type)
                             <option value="{{ $type->id }}">{{ $type->name }}</option>
                         @endforeach
