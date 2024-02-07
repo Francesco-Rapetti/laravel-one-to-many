@@ -19,7 +19,7 @@ body {
     width: 400px !important;
 }
 
-.card-img-top-container {
+.card-img-top-container:not(.dash) {
     height: 262px;
 }
 
