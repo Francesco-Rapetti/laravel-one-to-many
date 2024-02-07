@@ -13,7 +13,7 @@ class ProjectsController extends Controller
     public function validation(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:projects,name',
+            'name' => 'required',
             // 'description' => '',
             'image' => 'url',
             'url' => 'url'
@@ -29,7 +29,7 @@ class ProjectsController extends Controller
     {
         $types = Type::all();
         $projects = Project::all();
-        return view('admin.dashboard', compact('projects', 'types'));
+        return view('admin.projects.index', compact('projects', 'types'));
     }
 
     /**
@@ -52,7 +52,7 @@ class ProjectsController extends Controller
         $project->fill($request->all());
         $project->save();
 
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.projects.index');
     }
 
     /**
@@ -84,7 +84,7 @@ class ProjectsController extends Controller
 
         $project->fill($request->all());
         $project->update();
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.projects.index');
     }
 
     /**
@@ -94,6 +94,6 @@ class ProjectsController extends Controller
     {
         // $project = Project::find($id);
         $project->delete();
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.projects.index');
     }
 }
