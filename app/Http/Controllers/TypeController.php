@@ -4,15 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TypeController extends Controller
 {
+    public function validation(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'description' => 'required',
+            'icon' => 'required|min:3|max:255'
+        ])->validate();
+
+        return $validator;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $types = Type::all();
+        return view("admin.types.index", compact("types"));
     }
 
     /**
@@ -20,7 +33,8 @@ class TypeController extends Controller
      */
     public function create()
     {
-        //
+        $icons = config('fa');
+        return view("admin.types.create", compact("icons"));
     }
 
     /**
@@ -28,7 +42,11 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validation($request);
+        $type = new Type();
+        $type->fill($request->all());
+        $type->save();
+        return redirect()->route('admin.types.index');
     }
 
     /**
@@ -44,7 +62,8 @@ class TypeController extends Controller
      */
     public function edit(Type $type)
     {
-        //
+        $types = Type::all();
+        return view("admin.types.edit", compact("type", "types"));
     }
 
     /**
@@ -52,7 +71,10 @@ class TypeController extends Controller
      */
     public function update(Request $request, Type $type)
     {
-        //
+        $this->validation($request);
+        $type->fill($request->all());
+        $type->update();
+        return redirect()->route('admin.types.index');
     }
 
     /**
@@ -60,6 +82,7 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        //
+        $type->delete();
+        return redirect()->route('admin.types.index');
     }
 }
